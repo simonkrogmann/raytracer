@@ -1,3 +1,7 @@
 # raytracer
 
-A small raytracer with a very limited set of features written in C++.
+A small raytracer written in C++.
+Visual Studio is needed for building this project.
+
+## Example Image
+![example image](example-image.png)
