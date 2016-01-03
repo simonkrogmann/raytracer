@@ -37,9 +37,9 @@ vec3<float> Scene::findColorFor(const Line &ray, const int &bounces,
     }
     const auto reflection = i.object->reflect(ray, i.intersection);
 
-    float lightFactor = (light - i.intersection)
-                            .normalize()
-                            .dot(i.object->normalAt(i.intersection));
+    auto lightFactor = (light - i.intersection)
+                           .normalize()
+                           .dot(i.object->normalAt(i.intersection));
     lightFactor = std::max(lightFactor, 0.0f);
 
     const auto lightTest = Line::throughPoints(i.intersection, light);

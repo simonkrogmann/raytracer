@@ -30,12 +30,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    Material mirror = {{2.0f, 7.0f, 1.0f}, {0.0f}, {240.f}};
-    Material diffuseRed = {{7, 1, 20}, {72, 12, 203}, {0.0f}};
-    Material diffuseYellow = {{7, 20, 20}, {72, 200, 200}, {0.0f}};
-    Material diffuseGreen = {{7, 20, 1}, {72, 200, 12}, {0.0f}};
-    Material diffuseWhite = {{25, 25, 25}, {255, 255, 255}, {0.0f}};
-    Material diffusePurple = {{7, 1, 5}, {72, 12, 50}, {0.0f}};
+    Material mirror = {{2, 7, 1}, {0.f}, {240.f}};
+    Material diffuseRed = {{7, 1, 20}, {72, 12, 203}, {0.f}};
+    Material diffuseYellow = {{7, 20, 20}, {72, 200, 200}, {0.f}};
+    Material diffuseGreen = {{7, 20, 1}, {72, 200, 12}, {0.f}};
+    Material diffuseWhite = {{25, 25, 25}, {255, 255, 255}, {0.f}};
+    Material diffusePurple = {{7, 1, 5}, {72, 12, 50}, {0.f}};
     Material reflectingRed = {{7, 1, 20}, {14, 2, 40}, {72, 12, 203}};
     Material reflectingYellow = {{7, 20, 20}, {14, 40, 40}, {72, 200, 200}};
     Material reflectingGreen = {{7, 20, 1}, {14, 40, 2}, {72, 200, 12}};
@@ -43,13 +43,12 @@ int main(int argc, char *argv[])
     Material reflectingPurple = {{7, 1, 5}, {14, 2, 10}, {72, 12, 50}};
 
     Scene s{vec3<float>(15, -0.6, 5)};
-    s.add(std::make_unique<Sphere>(vec3<float>(4, 2, 25), 5.f, reflectingRed));
-    s.add(
-        std::make_unique<Sphere>(vec3<float>(10, 0, 15), 1.f, reflectingGreen));
+    s.add(std::make_unique<Sphere>(vec3<float>(4, 2, 25), 5, reflectingRed));
+    s.add(std::make_unique<Sphere>(vec3<float>(10, 0, 15), 1, reflectingGreen));
     s.add(std::make_unique<Sphere>(vec3<float>(0, -4, 15), 0.3f,
                                    reflectingPurple));
-    s.add(std::make_unique<Sphere>(vec3<float>(-3, -6, 23), 5.f,
-                                   reflectingYellow));
+    s.add(
+        std::make_unique<Sphere>(vec3<float>(-3, -6, 23), 5, reflectingYellow));
     s.add(std::make_unique<Plane>(vec3<float>(0, 0, 30), vec3<float>(0, 0, -1),
                                   diffuseWhite));
     s.add(std::make_unique<Plane>(vec3<float>(0, 0, -5), vec3<float>(0, 0, 1),

@@ -13,7 +13,7 @@ bool Sphere::hasIntersectionWith(const Line& l) const
 
 vec3<float> Sphere::intersect(const Line& l) const
 {
-    const vec3<float> to_origin = l.origin - center;
+    const auto to_origin = l.origin - center;
     const double determinant = std::pow(l.direction.dot(to_origin), 2) -
                                std::pow(to_origin.length(), 2) +
                                std::pow(radius, 2);
