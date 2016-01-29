@@ -7,10 +7,6 @@
 #include "SceneObject.h"
 #include "Line.h"
 
-#define BACKGROUND \
-    vec3<float> { 52.0f }
-#define MAX_BOUNCES 7
-
 struct Intersection
 {
     vec3<float> intersection;
@@ -21,7 +17,7 @@ struct Intersection
 class Scene
 {
 public:
-    Scene(vec3<float> light) : light{light} {}
+    Scene(const vec3<float>& light, const vec3<float>& background, const unsigned int& maxBounces) : light{light}, m_background{background}, m_maxBounces{maxBounces} {}
     ~Scene() {}
     void add(std::unique_ptr<SceneObject> &&s)
     {
@@ -29,10 +25,12 @@ public:
     }
     Intersection intersect(const Line &l,
                            const float &closerThanSquared = INFINITY) const;
-    vec3<float> findColorFor(const Line &ray, const int &bounces = 0,
+    vec3<float> findColorFor(const Line &ray, const unsigned int &bounces = 0,
                              const vec3<float> &intensity = {1.0f}) const;
 
 private:
     vec3<float> light;
     std::vector<std::unique_ptr<SceneObject>> objects;
+    vec3<float> m_background;
+    unsigned int m_maxBounces;
 };

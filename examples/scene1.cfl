@@ -1,0 +1,86 @@
+resolution:
+    width: 1920
+    height: 1080
+    supersampling: 1
+light: 15, -0.6, 5
+camera: 0, 0, 0
+background: 52
+bounces: 7
+materials:
+    mirror:
+        ambient: 2, 7, 1
+        diffuse: 0
+        specular: 240
+    diffuseRed:
+        ambient: 7, 1, 20
+        diffuse: 72, 12, 203
+        specular: 0
+    diffuseYellow:
+        ambient: 7, 20, 20
+        diffuse: 72, 200, 200
+        specular: 0
+    diffuseGreen:
+        ambient: 7, 20, 1
+        diffuse: 72, 200, 12
+        specular: 0
+    diffuseWhite:
+        ambient: 25, 25, 25
+        diffuse: 255, 255, 255
+        specular: 0
+    diffusePurple:
+        ambient: 7, 1, 5
+        diffuse: 72, 12, 50
+        specular: 0
+    reflectingRed:
+        ambient: 7, 1, 20
+        diffuse: 14, 2, 40
+        specular: 72, 12, 203
+    reflectingYellow:
+        ambient: 7, 20, 20
+        diffuse: 14, 40, 40
+        specular: 72, 200, 200
+    reflectingGreen:
+        ambient: 7, 20, 1
+        diffuse: 14, 40, 2
+        specular: 72, 200, 12
+    reflectingWhite:
+        ambient: 25, 25, 25
+        diffuse: 50, 50, 50
+        specular: 255, 255, 255
+    reflectingPurple:
+        ambient: 7, 1, 5
+        diffuse: 14, 2, 10
+        specular: 72, 12, 50
+objects:
+    sphere:
+        position: 4, 2, 25
+        radius: 5
+        material: reflectingRed
+    sphere:
+        position: 10, 0, 15
+        radius: 1
+        material: reflectingGreen
+    sphere:
+        position: 0, -4, 15
+        radius: 0.3
+        material: reflectingPurple
+    sphere:
+        position: -3, -6, 23
+        radius: 5
+        material: reflectingYellow
+    plane:
+        position: 0, 0, 30
+        normal: 0, 0, -1
+        material: diffuseWhite
+    plane:
+        position: 0, 0, -5
+        normal: 0, 0, 1
+        material: diffuseWhite
+    plane:
+        position: -15, 0, 0
+        normal: 1, 0, 0
+        material: diffuseWhite
+    plane:
+        position: 20, 0, 0
+        normal: -1, 0, 0
+        material: diffuseWhite

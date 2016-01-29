@@ -17,6 +17,18 @@ public:
     vec3() : x{0}, y{0}, z{0} {};
     vec3(bool valid) : x{0}, y{0}, z{0}, valid{valid} {};
     vec3(number fill) : x{fill}, y{fill}, z{fill} {};
+
+    template <typename container_type>
+    vec3(container_type container)
+    {
+        assert(container.size() == 3);
+        auto it = container.begin();
+        x = *(it++);
+        y = *(it++);
+        z = *(it++);
+    }
+
+
     vec3(number x, number y, number z) : x{x}, y{y}, z{z} {};
     ~vec3(){};
 
