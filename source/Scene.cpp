@@ -23,17 +23,17 @@ Intersection Scene::intersect(const Line &l,
     return {best, bestObject};
 }
 
-vec3<float> Scene::findColorFor(const Line &ray, const int &bounces,
+vec3<float> Scene::findColorFor(const Line &ray, const unsigned int &bounces,
                                 const vec3<float> &intensity) const
 {
-    if (bounces > MAX_BOUNCES || intensity.max() < 0.01)
+    if (bounces > m_maxBounces || intensity.max() < 0.01)
     {
-        return BACKGROUND;
+        return m_background;
     }
     const auto i = intersect(ray);
     if (!i.isValid())
     {
-        return BACKGROUND;
+        return m_background;
     }
     const auto reflection = i.object->reflect(ray, i.intersection);
 
