@@ -17,7 +17,11 @@ struct Intersection
 class Scene
 {
 public:
-    Scene(const vec3<float>& light, const vec3<float>& background, const unsigned int& maxBounces) : light{light}, m_background{background}, m_maxBounces{maxBounces} {}
+    Scene(const vec3<float> &light, const vec3<float> &background,
+          const unsigned int &maxBounces)
+        : light{light}, m_background{background}, m_maxBounces{maxBounces}
+    {
+    }
     ~Scene() {}
     void add(std::unique_ptr<SceneObject> &&s)
     {

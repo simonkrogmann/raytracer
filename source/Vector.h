@@ -28,7 +28,6 @@ public:
         z = *(it++);
     }
 
-
     vec3(number x, number y, number z) : x{x}, y{y}, z{z} {};
     ~vec3(){};
 

@@ -1,5 +1,5 @@
 set(sources
-    Main.cpp
+    main.cpp
     Line.cpp
     Material.cpp
     Scene.cpp
@@ -20,7 +20,7 @@ set(includes
 )
 
 set(libraries
-    utilgpu::cpp utilgpu::qt
+    utilgpu::cpp Qt5::Gui
 )
 
 create_executable(${project} raytracer "${sources}" "${includes}" "${libraries}")

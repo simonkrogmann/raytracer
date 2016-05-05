@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <utilgpu/cpp/cfl.h>
-#include <utilgpu/qt/texture.h>
+#include <QImage>
 
 #include "Scene.h"
 #include "Sphere.h"
@@ -15,10 +15,10 @@
 
 #define COLORS 3
 
-void save(const std::vector<vec3<float>> &map, const int& width,
-               const int& height, const std::string &filename);
+void save(const std::vector<vec3<float>>& map, const int& width,
+          const int& height, const std::string& filename);
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     if (argc < 3)
     {
@@ -36,7 +36,8 @@ int main(int argc, char *argv[])
     auto& resolution = *root["resolution"];
     auto width = static_cast<unsigned int>(resolution["width"]->value(1920));
     auto height = static_cast<unsigned int>(resolution["height"]->value(1080));
-    auto supersampling = static_cast<unsigned int>(resolution["supersampling"]->value(1));
+    auto supersampling =
+        static_cast<unsigned int>(resolution["supersampling"]->value(1));
     auto light = root["light"]->valueVector<3>({0});
     auto camera = root["camera"]->valueVector<3>({0});
     auto background = root["background"]->valueVector<3>({0});
@@ -51,11 +52,9 @@ int main(int argc, char *argv[])
     {
         auto& node = *nodePtr;
         materials[node.name()] =
-            Material {
-                node["ambient"]->valueVector<3>({0}),
-                node["diffuse"]->valueVector<3>({0}),
-                node["specular"]->valueVector<3>({0})
-            };
+            Material{node["ambient"]->valueVector<3>({0}),
+                     node["diffuse"]->valueVector<3>({0}),
+                     node["specular"]->valueVector<3>({0})};
     }
     std::vector<std::unique_ptr<SceneObject>> objects;
     for (const auto& nodePtr : root["objects"]->children())
@@ -63,25 +62,21 @@ int main(int argc, char *argv[])
         auto& node = *nodePtr;
         if (node.name() == "sphere")
         {
-            objects.push_back(std::make_unique<Sphere>(
-                node["position"]->valueVector<3>({0}),
-                node["radius"]->value(0.0f),
-                materials[node["material"]->value()]
-            ));
+            objects.push_back(
+                std::make_unique<Sphere>(node["position"]->valueVector<3>({0}),
+                                         node["radius"]->value(0.0f),
+                                         materials[node["material"]->value()]));
         }
         else if (node.name() == "plane")
         {
-            objects.push_back(std::make_unique<Plane>(
-                node["position"]->valueVector<3>({0}),
-                node["normal"]->valueVector<3>({0}),
-                materials[node["material"]->value()]
-            ));
+            objects.push_back(
+                std::make_unique<Plane>(node["position"]->valueVector<3>({0}),
+                                        node["normal"]->valueVector<3>({0}),
+                                        materials[node["material"]->value()]));
         }
     }
 
-    Scene s{light, background,
-        bounces
-    };
+    Scene s{light, background, bounces};
     const vec3<float> cameraPosition{camera};
     for (auto& object : objects)
     {
@@ -102,7 +97,8 @@ int main(int argc, char *argv[])
                         ((x * supersampling + x_s) - samplesX / 2.f) / samplesY,
                         ((y * supersampling + y_s) - samplesY / 2.f) / samplesY,
                         1.f};
-                    const auto ray = Line::throughPoints(cameraPosition, cameraPosition + through);
+                    const auto ray = Line::throughPoints(
+                        cameraPosition, cameraPosition + through);
 
                     sample += s.findColorFor(ray);
                 }
@@ -114,8 +110,8 @@ int main(int argc, char *argv[])
     save(pixels, width, height, argv[2]);
 }
 
-void save(const std::vector<vec3<float>> &map, const int& width,
-               const int& height, const std::string &filename)
+void save(const std::vector<vec3<float>>& map, const int& width,
+          const int& height, const std::string& filename)
 {
     std::vector<unsigned char> data;
     for (const auto& vec : map)
@@ -126,5 +122,7 @@ void save(const std::vector<vec3<float>> &map, const int& width,
         }
         data.push_back(255);
     }
-    util::saveImage(data, width, height, filename);
+    const QImage image{data.data(), width, height, QImage::Format_ARGB32};
+    const auto status = image.save(QString::fromStdString(filename));
+    assert(status);
 }
