@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
 #include <memory>
+#include <vector>
 
-#include "Vector.h"
-#include "SceneObject.h"
 #include "Line.h"
+#include "SceneObject.h"
+#include "Vector.h"
 
 struct Intersection
 {
@@ -28,7 +28,8 @@ public:
         objects.push_back(std::move(s));
     }
     Intersection intersect(const Line &l,
-                           const float &closerThanSquared = INFINITY) const;
+                           const float &closerThanSquared =
+                               std::numeric_limits<float>::infinity()) const;
     vec3<float> findColorFor(const Line &ray, const unsigned int &bounces = 0,
                              const vec3<float> &intensity = {1.0f}) const;
 

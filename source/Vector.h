@@ -1,7 +1,9 @@
 #pragma once
 
-#include <vector>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <vector>
 
 template <typename number>
 inline number clip(number n, number min, number max)
@@ -81,7 +83,7 @@ public:
         return vec3{y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x};
     }
 
-    double length() const { return sqrt(x * x + y * y + z * z); }
+    double length() const { return std::sqrt(x * x + y * y + z * z); }
     float lengthSquared() const { return x * x + y * y + z * z; }
     vec3<number> clamp(const number &min, const number &max) const
     {
@@ -92,7 +94,7 @@ public:
     // I - 2.0 * dot(N, I) * N
     vec3<number> reflect(const vec3<number> &normal) const
     {
-        return operator-(normal * static_cast<number>(2.0 * dot(normal)));
+        return operator-(normal *static_cast<number>(2.0 * dot(normal)));
     }
 
     vec3<number> normalize() const { return operator/(length()); }

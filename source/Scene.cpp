@@ -1,7 +1,7 @@
 #include "Scene.h"
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 Intersection Scene::intersect(const Line &l,
                               const float &closerThanSquared) const

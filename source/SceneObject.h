@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Line.h"
 #include <iostream>
+
+#include "Line.h"
 #include "Material.h"
 
 #define BIAS 0.01

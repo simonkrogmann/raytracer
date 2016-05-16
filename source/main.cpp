@@ -1,16 +1,14 @@
 #include <iostream>
-#include <fstream>
-#include <cstdlib>
 #include <memory>
 
 #include <utilgpu/cpp/cfl.h>
 #include <QImage>
 
-#include "Scene.h"
-#include "Sphere.h"
-#include "Plane.h"
-#include "SceneObject.h"
 #include "Material.h"
+#include "Plane.h"
+#include "Scene.h"
+#include "SceneObject.h"
+#include "Sphere.h"
 #include "Vector.h"
 
 #define COLORS 3
@@ -114,13 +112,17 @@ void save(const std::vector<vec3<float>>& map, const int& width,
           const int& height, const std::string& filename)
 {
     std::vector<unsigned char> data;
-    for (const auto& vec : map)
+    for (int y = height - 1; y >= 0; --y)
     {
-        for (auto i = 0u; i < COLORS; i++)
+        for (int x = 0; x < width; ++x)
         {
-            data.push_back(static_cast<unsigned char>(vec[i]));
+            const auto& vec = map[y * width + x];
+            for (auto i = 0u; i < COLORS; i++)
+            {
+                data.push_back(static_cast<unsigned char>(vec[i]));
+            }
+            data.push_back(255);
         }
-        data.push_back(255);
     }
     const QImage image{data.data(), width, height, QImage::Format_ARGB32};
     const auto status = image.save(QString::fromStdString(filename));
